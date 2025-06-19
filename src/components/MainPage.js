@@ -1,21 +1,21 @@
+// This is the Main Page(over which LoginModal and SignUp modal appear)
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // To navigate to survey page
-import SurveyForm from './SurveyForm';
+import { useNavigate } from 'react-router-dom'; 
 import LoginModal from './LoginModal'; 
 
 const MainPage = () => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);  // Modal visibility
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  // Track login status
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
+  const navigate = useNavigate(); 
 
   const toggleLoginModal = () => {
-    setIsLoginModalOpen(!isLoginModalOpen); // Toggle modal visibility
+    setIsLoginModalOpen(!isLoginModalOpen);
   };
 
   const handleLoginSuccess = () => {
-    setIsLoggedIn(true); // Update login status
-    setIsLoginModalOpen(false); // Close the login modal
-    navigate('/survey'); // Redirect to the survey page after successful login
+    setIsLoggedIn(true); 
+    setIsLoginModalOpen(false); 
+    navigate('/survey'); 
   };
 
   return (

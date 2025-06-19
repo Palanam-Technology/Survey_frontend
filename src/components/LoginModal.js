@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import plogo from '../assets/clue-logo.jpg';
+import plogo from '../assets/logo.jpg';
 import loginBg from '../assets/image8.png';
 
 const LoginModal = ({ setIsModalOpen }) => {
@@ -26,6 +26,20 @@ const LoginModal = ({ setIsModalOpen }) => {
       setError('Invalid username or password');
     }
   };
+const [showResetForm, setShowResetForm] = useState(false);
+const [resetEmail, setResetEmail] = useState('');
+
+const handleResetPassword = async (e) => {
+  e.preventDefault();
+  try {
+    await axios.post('http://localhost:5000/api/users/reset-password', { email: resetEmail });
+    alert('Reset password link sent to your email.');
+    setShowResetForm(false);
+    setResetEmail('');
+  } catch (err) {
+    alert(err.response?.data?.message || "Error sending reset link.");
+  }
+};
 
   return (
     <div
@@ -71,7 +85,7 @@ const LoginModal = ({ setIsModalOpen }) => {
           </button>
         </form>
 
-        <div className="text-sm text-gray-700">
+        <div className="text-md text-gray-700">
           <p>
             Create Account?{' '}
             <span
@@ -80,10 +94,30 @@ const LoginModal = ({ setIsModalOpen }) => {
                 setIsModalOpen(false);
                 navigate('/signup');
               }}
-            >
+            ><br></br>
               Signup
             </span>
-          </p>
+          {/* </p>
+          <p>Don't remember your password?{' '}
+            <span className="text-md text-right text-blue-600 cursor-pointer" onClick={() => setShowResetForm(true)}><br></br>
+  Reset Password</span> */}
+</p>
+
+{showResetForm && (
+  <form onSubmit={handleResetPassword}>
+    <input
+      type="email"
+      name="resetEmail"
+      placeholder="Enter your email"
+      value={resetEmail}
+      onChange={(e) => setResetEmail(e.target.value)}
+      className="w-full px-3 py-2 border rounded mt-2"
+    />
+    <button type="submit" className="bg-blue-500 text-white py-1 px-3 rounded mt-2">
+      Send Reset Link
+    </button>
+  </form>
+)}
         </div>
       </div>
     </div>

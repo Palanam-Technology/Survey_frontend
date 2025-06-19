@@ -4,6 +4,7 @@ import LoginModal from './components/LoginModal';
 import MainPage from './components/MainPage'; // Import MainPage
 import SurveyForm from './components/SurveyForm'; // Import SurveyForm
 import SignUpPage from './components/SignUpPage';
+import ResetPasswordPage from './components/ResetPasswordPage';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const AppWithRouter = () => {
         <Route path="/" element={<div></div>} />
         <Route path="/survey" element={<SurveyForm />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
       </Routes>
     </>
   );
